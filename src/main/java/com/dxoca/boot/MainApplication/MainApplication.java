@@ -1,7 +1,9 @@
 package com.dxoca.boot.MainApplication;
 
+import com.dxoca.boot.MainApplication.bean.Pet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 /**
  * maven 打jar包 lifeCycle（clean package）
  */
@@ -17,7 +19,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "com.dxoca.boot")//扩大默认扫描范围
 public class MainApplication {
   public static void main(String[] args) {
-    SpringApplication.run(MainApplication.class, args);
+    ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
+    String[] names = run.getBeanDefinitionNames();
+    for (String name : names) {
+      System.out.println(name);
+    }
+    run.getBean("tom", Pet.class);
+
   }
 }
 
